@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, ChevronRight, LogOut } from "lucide-react";
+import { Bell, ChevronDown, ChevronRight, LogOut } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -51,65 +51,69 @@ function TopNav({
 }) {
   return (
     <header
-      className={`absolute inset-x-0 top-0 z-30 flex h-16 items-center justify-between gap-6 px-6 lg:px-10 ${
+      className={`absolute inset-x-0 top-0 z-30 h-16 ${
         lightNav
           ? "border-b border-black/5 bg-[#faf6f0]/95 text-[#222] backdrop-blur-sm"
           : "text-white"
       }`}
     >
-      <Link href="/discover" className="flex items-center gap-2">
-        <Image
-          src="/figma/logo.png"
-          alt="Wellness & Mind"
-          width={40}
-          height={40}
-          className="h-10 w-10"
-        />
-        <span
-          className={`hidden font-serif leading-tight sm:block ${
-            lightNav ? "text-[#222]" : "text-white drop-shadow-sm"
-          }`}
-        >
-          <span className="block text-[13px] tracking-wider">WELLNESS</span>
-          <span className="block text-[16px] tracking-wider">&amp; MIND</span>
-        </span>
-      </Link>
+      <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-6 px-6 lg:px-10">
+        <Link href="/discover" className="flex items-center gap-2">
+          <Image
+            src="/figma/logo.png"
+            alt="Wellness & Mind"
+            width={40}
+            height={40}
+            className="h-10 w-10"
+          />
+          <span
+            className={`hidden font-serif leading-tight sm:block ${
+              lightNav ? "text-[#222]" : "text-white drop-shadow-sm"
+            }`}
+          >
+            <span className="block text-[13px] tracking-wider">WELLNESS</span>
+            <span className="block text-[16px] tracking-wider">&amp; MIND</span>
+          </span>
+        </Link>
 
-      <nav className="hidden items-center gap-8 lg:flex">
-        {NAV.map((item) => {
-          const isActive = active === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`text-sm tracking-wide transition ${
-                lightNav
-                  ? isActive
-                    ? "font-medium text-[#761c37]"
-                    : "text-[#222]/70 hover:text-[#222]"
-                  : isActive
-                    ? "text-[#f4c481] drop-shadow-sm"
-                    : "text-white/85 drop-shadow-sm hover:text-white"
-              }`}
-            >
-              {item.label}
-            </Link>
-          );
-        })}
-      </nav>
+        <nav className="hidden items-center gap-8 lg:flex">
+          {NAV.map((item) => {
+            const isActive = active === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`text-sm tracking-wide transition ${
+                  lightNav
+                    ? isActive
+                      ? "font-medium text-[#761c37]"
+                      : "text-[#222]/70 hover:text-[#222]"
+                    : isActive
+                      ? "text-[#f4c481] drop-shadow-sm"
+                      : "text-white/85 drop-shadow-sm hover:text-white"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
 
-      <div className="flex items-center gap-3">
-        <button
-          className={`relative grid size-9 place-items-center rounded-full backdrop-blur-sm ${
-            lightNav ? "bg-black/5 text-[#222]" : "bg-white/15 text-white"
-          }`}
-          aria-label="Notifications"
-        >
-          <Bell className="size-4" />
-          <span className="absolute top-2 right-2 size-1.5 rounded-full bg-[#761c37]" />
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            className={`relative grid size-9 place-items-center rounded-full backdrop-blur-sm ${
+              lightNav
+                ? "bg-black/5 text-[#222]"
+                : "bg-white/10 text-white drop-shadow-sm"
+            }`}
+            aria-label="Notifications"
+          >
+            <Bell className="size-5 fill-current" strokeWidth={1.5} />
+            <span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-[#E5484D]" />
+          </button>
 
-        <UserMenu dark={dark} lightNav={lightNav} />
+          <UserMenu dark={dark} lightNav={lightNav} />
+        </div>
       </div>
     </header>
   );
@@ -168,6 +172,11 @@ function UserMenu({ dark, lightNav }: { dark: boolean; lightNav: boolean }) {
             danielwilliams@mail.com
           </span>
         </div>
+        <ChevronDown
+          className={`hidden size-4 shrink-0 transition-transform sm:block ${
+            open ? "rotate-180" : ""
+          } ${lightNav ? "text-[#222]/50" : "text-white/70 drop-shadow-sm"}`}
+        />
       </button>
 
       {open && (
@@ -342,20 +351,22 @@ function UserMenuDropdown({
 function Footer({ dark }: { dark: boolean }) {
   return (
     <footer
-      className={`flex flex-wrap items-center justify-between gap-3 px-6 py-5 text-xs lg:px-10 ${
+      className={`text-xs ${
         dark
           ? "bg-[#1a0b0b]/70 text-white/60"
           : "border-t border-black/5 bg-[#E9DFD5] text-[#222]/60"
       }`}
     >
-      <p>&copy; 2026 Happiness Experience. Private client platform.</p>
-      <div className="flex items-center gap-6">
-        <Link href="/vault" className="hover:underline">
-          Secure Vault
-        </Link>
-        <Link href="/settings" className="hover:underline">
-          Privacy &amp; security
-        </Link>
+      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-5 lg:px-10">
+        <p>&copy; 2026 Happiness Experience. Private client platform.</p>
+        <div className="flex items-center gap-6">
+          <Link href="/vault" className="hover:underline">
+            Secure Vault
+          </Link>
+          <Link href="/settings" className="hover:underline">
+            Privacy &amp; security
+          </Link>
+        </div>
       </div>
     </footer>
   );

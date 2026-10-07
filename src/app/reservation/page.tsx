@@ -110,18 +110,25 @@ export default function ReservationPage() {
             A private reservation, arranged around your schedule and preferences.
           </p>
 
-          <ol className="mt-8 flex items-center text-sm">
+          <ol className="mt-8 flex w-full max-w-3xl items-center rounded-full bg-white px-6 py-3 text-sm shadow-lg shadow-black/10">
             {STEPS.map((s, i) => (
-              <li key={s} className="flex items-center">
+              <li
+                key={s}
+                className={`flex items-center ${
+                  i < STEPS.length - 1 ? "flex-1" : ""
+                }`}
+              >
                 <button
                   onClick={() => setStep(i)}
-                  className="flex items-center gap-2.5"
+                  className="flex shrink-0 items-center gap-2.5"
                 >
                   <span
                     className={`inline-flex size-7 items-center justify-center rounded-full text-xs font-medium ${
-                      i <= step
+                      i === step
                         ? "bg-gradient-to-r from-[#761c37] to-[#913f58] text-white"
-                        : "border border-[#eabe83]/50 bg-transparent text-[#f4c481]"
+                        : i < step
+                          ? "bg-[#913f58]/10 text-[#913f58]"
+                          : "bg-[#F6EEDF] text-[#C2A062]"
                     }`}
                   >
                     {i < step ? <Check className="size-3.5" /> : i + 1}
@@ -129,17 +136,19 @@ export default function ReservationPage() {
                   <span
                     className={
                       i === step
-                        ? "font-medium text-white"
-                        : i < step
-                          ? "text-white/80"
-                          : "text-white/50"
+                        ? "font-medium text-[#222]"
+                        : "text-black/40"
                     }
                   >
                     {s}
                   </span>
                 </button>
                 {i < STEPS.length - 1 && (
-                  <span className="mx-4 h-px w-12 border-t border-dashed border-white/25" />
+                  <span
+                    className={`mx-4 flex-1 border-t ${
+                      i < step ? "border-[#913f58]/35" : "border-black/10"
+                    }`}
+                  />
                 )}
               </li>
             ))}

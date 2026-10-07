@@ -153,7 +153,7 @@ export default function DiscoverPage() {
           />
         </div>
 
-        <div className="relative mx-auto flex max-w-5xl flex-col gap-6 px-6 lg:px-10">
+        <div className="relative mx-auto flex max-w-6xl flex-col gap-6 px-6 lg:px-10">
           <p className="text-[12px] font-medium tracking-[0.22em] text-[#502E00] uppercase">
             Good evening, Daniel
           </p>
@@ -201,7 +201,7 @@ export default function DiscoverPage() {
       </section>
 
       {/* Post-hero: Active Mission + Timeline + Right column */}
-      <section className="relative z-20 mx-auto -mt-10 max-w-5xl px-6 pb-10 lg:px-10">
+      <section className="relative z-20 mx-auto -mt-10 max-w-6xl px-6 pb-10 lg:px-10">
         <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
           {/* Big card: Active Mission + Timeline */}
           <article
@@ -432,7 +432,7 @@ export default function DiscoverPage() {
       </section>
 
       {/* Curated for you */}
-      <section className="mx-auto max-w-5xl px-6 pb-12 lg:px-10">
+      <section className="mx-auto max-w-6xl px-6 pb-12 lg:px-10">
         <Link
           href="/reservation"
           className="relative block overflow-hidden rounded-[22px]"
@@ -478,7 +478,7 @@ export default function DiscoverPage() {
       </section>
 
       {/* Recommended experiences */}
-      <section className="mx-auto max-w-5xl px-6 pb-16 lg:px-10">
+      <section className="mx-auto max-w-6xl px-6 pb-16 lg:px-10">
         <p
           className={`mb-5 text-[11px] font-medium tracking-[0.2em] uppercase ${
             dark ? "text-white/70" : "text-[#222]/70"
@@ -551,7 +551,7 @@ export default function DiscoverPage() {
       </section>
 
       <div
-        className={`mx-auto flex max-w-5xl items-center justify-end gap-2 px-6 pb-6 text-[10px] lg:px-10 ${
+        className={`mx-auto flex max-w-6xl items-center justify-end gap-2 px-6 pb-6 text-[10px] lg:px-10 ${
           dark ? "text-white/40" : "text-[#222]/40"
         }`}
       >
