@@ -1,6 +1,14 @@
 "use client";
 
-import { Calendar, ChevronDown, Clock, MapPin, MessageSquare } from "lucide-react";
+import {
+  ArrowRight,
+  Calendar,
+  Check,
+  ChevronDown,
+  Clock,
+  MapPin,
+  MoreVertical,
+} from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { AppShell } from "@/components/app-shell";
@@ -89,7 +97,7 @@ export default function MissionsPage() {
 
   return (
     <AppShell active="/missions">
-      <section className="relative overflow-hidden">
+      <section className="relative min-h-[85vh] overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/figma/missions-hero.png"
@@ -101,16 +109,30 @@ export default function MissionsPage() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(20,6,10,0.55) 0%, rgba(20,6,10,0.4) 45%, rgba(250,246,240,0.25) 84%, #faf6f0 100%)",
+                "radial-gradient(60% 50% at 50% 45%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 70%)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(44,4,16,0.35) 0%, rgba(44,4,16,0.35) 55%, rgba(44,4,16,0.12) 80%, rgba(44,4,16,0) 92%)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent 70%, #faf6f0 100%)",
             }}
           />
         </div>
-        <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-2 px-6 py-16 text-center text-white lg:px-10 lg:py-20">
-          <p className="text-[11px] font-medium tracking-[0.2em] text-[#f4c481] uppercase">
+        <div className="relative mx-auto flex min-h-[85vh] max-w-6xl flex-col items-center justify-center gap-3 px-6 py-28 text-center text-white lg:px-10 lg:py-40">
+          <p className="text-xs font-medium tracking-[0.2em] text-[#f4c481] uppercase">
             Your Itinerary
           </p>
-          <h1 className="font-serif text-4xl">My Mission</h1>
-          <p className="max-w-xl text-sm text-white/70">
+          <h1 className="font-serif text-5xl lg:text-7xl">My Mission</h1>
+          <p className="max-w-2xl text-base text-white/70 lg:text-lg">
             All your upcoming, active and past experiences in one place. Track
             progress, manage requests and stay connected with your concierge.
           </p>
@@ -119,7 +141,7 @@ export default function MissionsPage() {
 
       <section className="mx-auto max-w-6xl px-6 py-8 lg:px-10">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1 rounded-full border border-black/5 bg-white p-1">
             {TABS.map((t) => {
               const active = activeTab === t.id;
               return (
@@ -129,7 +151,7 @@ export default function MissionsPage() {
                   className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-medium transition ${
                     active
                       ? "bg-gradient-to-r from-[#761c37] to-[#913f58] text-white"
-                      : "border border-black/10 bg-white text-[#222]/70"
+                      : "text-[#222]/70"
                   }`}
                 >
                   {t.label}
@@ -144,20 +166,26 @@ export default function MissionsPage() {
               );
             })}
           </div>
-          <button className="flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1.5 text-xs text-[#222]/70">
-            Sort by{" "}
-            <span className="font-medium text-[#222]">Date (Newest)</span>
-            <ChevronDown className="size-3" />
-          </button>
+          <div className="flex items-center gap-2 text-xs text-[#222]/60">
+            Sort by
+            <button className="flex items-center gap-2 rounded-full bg-gradient-to-r from-white to-[#fbefde] px-4 py-2 text-xs font-medium text-[#222] shadow-sm">
+              Date (Newest)
+              <ChevronDown className="size-3.5" />
+            </button>
+          </div>
         </div>
 
         <div className="flex flex-col gap-4">
           {MISSIONS.map((m) => (
             <article
               key={m.ref}
-              className="grid grid-cols-1 overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm md:grid-cols-[180px_1fr_200px]"
+              className="relative grid grid-cols-1 gap-5 rounded-3xl border border-black/5 bg-white p-4 md:grid-cols-[220px_1fr_auto]"
             >
-              <div className="relative h-32 md:h-full">
+              <button className="absolute top-4 right-4 text-[#222]/30 hover:text-[#222]/60">
+                <MoreVertical className="size-4" />
+              </button>
+
+              <div className="relative h-40 overflow-hidden rounded-2xl md:h-full">
                 <Image
                   src={m.img}
                   alt=""
@@ -165,13 +193,14 @@ export default function MissionsPage() {
                   className="object-cover"
                 />
               </div>
-              <div className="flex flex-col gap-3 p-5">
-                <div className="flex items-start justify-between gap-3">
+
+              <div className="flex flex-col gap-3 py-1">
+                <div className="flex items-start justify-between gap-3 pr-6">
                   <div>
-                    <p className="text-[10px] font-medium tracking-[0.18em] text-[#f4c481] uppercase">
+                    <p className="text-[10px] font-medium tracking-[0.18em] text-[#c98a4b] uppercase">
                       {m.tag}
                     </p>
-                    <h3 className="font-serif text-xl text-[#222]">
+                    <h3 className="font-serif text-2xl text-[#222]">
                       {m.title}
                     </h3>
                     <p className="text-[11px] text-[#222]/50">Ref {m.ref}</p>
@@ -184,22 +213,32 @@ export default function MissionsPage() {
                     {m.badge}
                   </span>
                 </div>
-                <div className="flex flex-wrap items-center gap-4 text-xs text-[#222]/60">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="size-3" /> {m.date}
+                <div className="flex flex-wrap items-center gap-5 text-xs text-[#222]/70">
+                  <span className="flex items-center gap-2">
+                    <span className="grid size-6 place-items-center rounded-full bg-[#fdeedd] text-[#c98a4b]">
+                      <Calendar className="size-3.5" />
+                    </span>
+                    {m.date}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="size-3" /> {m.time}
+                  <span className="flex items-center gap-2">
+                    <span className="grid size-6 place-items-center rounded-full bg-[#fdeedd] text-[#c98a4b]">
+                      <Clock className="size-3.5" />
+                    </span>
+                    {m.time}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <MapPin className="size-3" /> {m.location}
+                  <span className="flex items-center gap-2">
+                    <span className="grid size-6 place-items-center rounded-full bg-[#fdeedd] text-[#c98a4b]">
+                      <MapPin className="size-3.5" />
+                    </span>
+                    {m.location}
                   </span>
                 </div>
                 <Timeline steps={m.steps} activeStep={m.activeStep} />
               </div>
-              <div className="flex flex-col justify-center gap-3 border-l border-black/5 bg-[#faf6ef] p-5">
+
+              <div className="flex flex-col justify-center gap-3 border-t border-black/5 pt-4 md:w-[200px] md:border-t-0 md:border-l md:pt-1 md:pl-5">
                 <div>
-                  <p className="text-[10px] font-medium tracking-[0.18em] text-[#f4c481] uppercase">
+                  <p className="text-[10px] font-medium tracking-[0.18em] text-[#c98a4b] uppercase">
                     Total Investment
                   </p>
                   <p className="font-serif text-xl text-[#222]">
@@ -209,17 +248,17 @@ export default function MissionsPage() {
                     </span>
                   </p>
                 </div>
-                <button className="flex items-center justify-center gap-2 rounded-lg border border-black/5 bg-white px-3 py-2 text-[11px] font-medium text-[#222] shadow-sm">
-                  <span className="grid size-5 place-items-center rounded-full bg-[#222] text-white">
-                    <MessageSquare className="size-3" />
+                <button className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-white to-[#fbefde] px-4 py-2.5 text-[11px] font-medium text-[#222] shadow-sm">
+                  <span className="grid size-5 shrink-0 place-items-center rounded-full bg-[#222]">
+                    <Image src="/figma/message-white.svg" alt="" width={11} height={11} />
                   </span>
                   Message Concierge
                 </button>
                 <button
                   onClick={() => setOpenMission(m)}
-                  className="rounded-lg bg-gradient-to-r from-[#761c37] to-[#913f58] px-3 py-2 text-[11px] font-medium text-white"
+                  className="flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#761c37] to-[#913f58] px-3 py-2.5 text-[11px] font-medium text-white"
                 >
-                  View Mission →
+                  View Mission <ArrowRight className="size-3.5" />
                 </button>
               </div>
             </article>
@@ -248,20 +287,24 @@ function Timeline({
     <div className="relative flex items-center justify-between pt-2">
       <div className="absolute top-[14px] right-2 left-2 h-px bg-black/10" />
       {steps.map((s, i) => {
-        const done = i <= activeStep;
+        const completed = i < activeStep;
         const current = i === activeStep;
         return (
           <div key={s} className="relative flex flex-col items-center gap-1.5">
-            <span
-              className={`size-3 rounded-full border-2 ${
-                done
-                  ? "border-[#761c37] bg-[#761c37]"
-                  : "border-black/20 bg-white"
-              } ${current ? "ring-4 ring-[#761c37]/15" : ""}`}
-            />
+            {completed ? (
+              <span className="grid size-[15px] place-items-center rounded-full bg-[#eabe83] text-white">
+                <Check className="size-2.5" strokeWidth={3} />
+              </span>
+            ) : current ? (
+              <span className="grid size-[15px] place-items-center rounded-full bg-[#761c37] ring-4 ring-white">
+                <span className="size-1.5 rounded-full bg-white" />
+              </span>
+            ) : (
+              <span className="size-[15px] rounded-full border-2 border-black/15 bg-white" />
+            )}
             <span
               className={`max-w-[80px] text-center text-[9px] leading-tight ${
-                done ? "text-[#222]" : "text-[#222]/40"
+                current ? "font-semibold text-[#222]" : "text-[#222]/40"
               }`}
             >
               {s}

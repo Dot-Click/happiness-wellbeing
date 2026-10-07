@@ -72,7 +72,7 @@ export default function SettingsPage() {
 
       <section className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-6 pb-16 lg:grid-cols-[240px_1fr] lg:px-10">
         {/* Sidebar */}
-        <aside className="h-fit rounded-2xl border border-black/5 bg-white p-3 shadow-sm">
+        <aside className="h-fit rounded-2xl border border-black/5 bg-white p-3">
           <ul className="flex flex-col gap-1">
             {SIDE.map(({ id, label, icon: Icon }) => {
               const isActive = id === active;
@@ -122,7 +122,7 @@ function Card({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-black/5 bg-white p-6 shadow-sm ${className}`}
+      className={`rounded-2xl border border-black/5 bg-white p-6 ${className}`}
     >
       {children}
     </div>
@@ -242,7 +242,7 @@ function ProfileTab() {
         </div>
       </Card>
 
-      <div className="rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
+      <div className="rounded-2xl border border-black/5 bg-white p-5">
         <p className="text-sm font-medium text-[#222]">Member since March 2024</p>
         <div className="mt-3 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -262,10 +262,8 @@ function ProfileTab() {
             <span className="rounded-full bg-[#f3e2c7] px-3 py-1 text-[10px] font-medium text-[#8a5a1b]">
               VIP Member
             </span>
-            <button className="flex items-center gap-1.5 rounded-lg border border-black/5 bg-white px-3 py-1.5 text-[11px] font-medium text-[#222] shadow-sm">
-              <span className="grid size-5 place-items-center rounded-full bg-[#222] text-white">
-                <MessageSquare className="size-3" />
-              </span>
+            <button className="flex items-center gap-1.5 rounded-lg border border-black/10 bg-white px-3 py-1.5 text-[11px] font-medium text-[#222]">
+              <Image src="/figma/message-gray.svg" alt="" width={15} height={15} />
               Message
             </button>
           </div>

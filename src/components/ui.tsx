@@ -20,7 +20,7 @@ export function PrimaryButton({
 }) {
   return (
     <button
-      className={`${BUTTON_BASE} bg-gradient-to-r from-[#761c37] to-[#913f58] shadow-sm hover:brightness-110 ${className}`}
+      className={`${BUTTON_BASE} border border-white/15 bg-gradient-to-r from-[#761c37] to-[#913f58] hover:brightness-110 ${className}`}
       {...props}
     >
       {children}
@@ -38,7 +38,7 @@ export function SecondaryButton({
 }: ButtonHTMLAttributes<HTMLButtonElement> & { children: ReactNode }) {
   return (
     <button
-      className={`${BUTTON_BASE} bg-gradient-to-r from-[#313030] to-[#202020] shadow-sm hover:brightness-125 ${className}`}
+      className={`${BUTTON_BASE} border border-white/10 bg-gradient-to-r from-[#313030] to-[#202020] hover:brightness-125 ${className}`}
       {...props}
     >
       {children}
@@ -53,7 +53,7 @@ export function GhostButton({
 }: ButtonHTMLAttributes<HTMLButtonElement> & { children: ReactNode }) {
   return (
     <button
-      className={`flex h-11 items-center justify-center rounded-xl bg-gradient-to-r from-[#f8f8f8] to-white px-5 text-sm font-medium tracking-wide text-[#222] shadow-sm transition hover:brightness-95 disabled:opacity-50 ${className}`}
+      className={`flex h-11 items-center justify-center rounded-xl border border-black/10 bg-gradient-to-r from-[#f8f8f8] to-white px-5 text-sm font-medium tracking-wide text-[#222] transition hover:brightness-95 disabled:opacity-50 ${className}`}
       {...props}
     >
       {children}
@@ -70,7 +70,7 @@ export function Label({ children }: { children: ReactNode }) {
 }
 
 const FIELD_BASE =
-  "h-11 w-full rounded-xl border border-[#dfdfdf] bg-white px-3.5 text-sm tracking-wide text-[#222] shadow-sm outline-none placeholder:font-light placeholder:text-[rgba(34,34,34,0.42)] focus:border-[#761c37] focus:ring-2 focus:ring-[#761c37]/15";
+  "h-11 w-full rounded-xl border border-black/10 bg-white px-3.5 text-sm tracking-wide text-[#222] outline-none placeholder:font-light placeholder:text-[rgba(34,34,34,0.42)] focus:border-[#761c37] focus:ring-2 focus:ring-[#761c37]/15";
 
 export function TextInput(props: InputHTMLAttributes<HTMLInputElement>) {
   return <input className={FIELD_BASE} {...props} />;
@@ -115,7 +115,7 @@ export function NotificationRow({
     <button
       type="button"
       onClick={onToggle}
-      className="flex min-h-[56px] w-full items-center gap-3 rounded-xl border border-[#dfdfdf] bg-white px-3.5 py-2.5 text-left shadow-sm"
+      className="flex min-h-[56px] w-full items-center gap-3 rounded-xl border border-black/10 bg-white px-3.5 py-2.5 text-left"
     >
       {checked ? (
         <Image

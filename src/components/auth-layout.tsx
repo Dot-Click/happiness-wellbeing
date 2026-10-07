@@ -67,7 +67,7 @@ export function AuthLayout({ children }: { children: ReactNode }) {
       {/* Floating card panel — fixed height on desktop so step forms stay consistent */}
       <div className="relative z-20 flex min-h-screen w-full items-center justify-center p-4 lg:absolute lg:inset-0 lg:w-auto lg:justify-end lg:p-0 lg:pr-5">
         <div
-          className="flex w-full max-w-[460px] flex-col rounded-2xl border border-[#ccc7c7] bg-gradient-to-b from-[#fffcf6] to-white/95 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-xl sm:p-8 lg:h-[640px] lg:max-h-[calc(100vh-40px)]"
+          className="flex w-full max-w-[460px] flex-col rounded-2xl border border-black/10 bg-gradient-to-b from-[#fffcf6] to-white/95 p-6 backdrop-blur-xl sm:p-8 lg:h-[640px] lg:max-h-[calc(100vh-40px)]"
         >
           <div className="flex flex-1 flex-col gap-4 overflow-y-auto pr-1">
             {children}

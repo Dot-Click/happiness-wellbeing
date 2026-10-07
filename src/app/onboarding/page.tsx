@@ -102,7 +102,7 @@ export default function OnboardingPage() {
           <div className="absolute inset-0 bg-[rgba(15,2,2,0.88)]" />
         </div>
         <div className="relative z-10 flex min-h-screen items-center justify-center p-6">
-          <div className="flex w-full max-w-[400px] flex-col items-center gap-5 rounded-2xl bg-gradient-to-b from-[#fffcf3] to-[rgba(255,255,255,0.95)] p-10 text-center shadow-2xl backdrop-blur-xl">
+          <div className="flex w-full max-w-[400px] flex-col items-center gap-5 rounded-2xl border border-black/10 bg-gradient-to-b from-[#fffcf3] to-[rgba(255,255,255,0.95)] p-10 text-center backdrop-blur-xl">
             <Image
               src="/figma/icon-check-badge.png"
               alt=""
@@ -123,7 +123,7 @@ export default function OnboardingPage() {
             </div>
             <Link
               href="/"
-              className="mt-2 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#761c37] to-[#913f58] text-sm font-medium tracking-wide text-white shadow-sm transition hover:brightness-110"
+              className="mt-2 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-gradient-to-r from-[#761c37] to-[#913f58] text-sm font-medium tracking-wide text-white transition hover:brightness-110"
             >
               Go to your dashboard
               <Image src="/figma/icon-arrow.svg" alt="" width={13} height={11} />

@@ -1,17 +1,13 @@
 "use client";
 
 import {
-  Calendar,
   Car,
   Check,
-  Clock,
   Download,
   Eye,
   FileText,
   FlaskConical,
   Languages,
-  MapPin,
-  MessageSquare,
   Stethoscope,
   X,
 } from "lucide-react";
@@ -140,54 +136,71 @@ export function MissionDetailModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-sm sm:p-8"
+      className="fixed inset-0 z-50 flex items-stretch justify-end bg-black/60 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#120606] text-white shadow-2xl"
+        className="relative h-full w-full max-w-3xl overflow-y-auto rounded-3xl border border-black/5 bg-[#faf7f1] text-[#222] shadow-2xl"
       >
         {/* Header */}
-        <div className="relative border-b border-white/5 p-6 lg:p-8">
+        <div className="relative overflow-hidden border-b border-black/5 p-6 lg:p-8">
+          <div className="pointer-events-none absolute top-0 right-0 h-full w-1/2">
+            <Image
+              src="/figma/banner-corporate.png"
+              alt=""
+              fill
+              className="object-cover opacity-10"
+              style={{
+                maskImage: "linear-gradient(to left, black 40%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to left, black 40%, transparent 100%)",
+              }}
+            />
+          </div>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="absolute top-5 right-5 grid size-8 place-items-center rounded-full bg-white/5 text-white/70 hover:bg-white/10"
+            className="absolute top-5 right-5 grid size-8 place-items-center rounded-full bg-black/5 text-[#222]/60 hover:bg-black/10"
           >
             <X className="size-4" />
           </button>
 
-          <p className="text-[11px] font-medium tracking-[0.2em] text-[#f4c481] uppercase">
+          <p className="text-[11px] font-medium tracking-[0.2em] text-[#c98a4b] uppercase">
             {mission.tag}
           </p>
-          <div className="mt-1 flex flex-wrap items-center gap-3">
-            <h2 className="font-serif text-3xl text-white">{mission.title}</h2>
-            <span className="rounded-full border border-[#8b3851]/40 bg-[#8b3851]/25 px-3 py-1 text-[10px] font-medium text-[#f1a9b8]">
+          <div className="mt-1 flex flex-wrap items-center gap-3 pr-10">
+            <h2 className="font-serif text-3xl text-[#222]">{mission.title}</h2>
+            <span
+              className={`rounded-full px-3 py-1 text-[10px] font-medium ${
+                BADGE_STYLES[mission.badge] ?? "bg-[#f3f3f3] text-[#6b6b6b]"
+              }`}
+            >
               {mission.badge}
             </span>
-            <span className="rounded-full border border-[#f4c481]/30 bg-[#f4c481]/15 px-3 py-1 text-[10px] font-medium text-[#f4c481]">
+            <span className="rounded-full border border-[#eabe83]/50 bg-[#fdf1df] px-3 py-1 text-[10px] font-medium text-[#c98a4b]">
               VIP
             </span>
           </div>
-          <p className="mt-1 text-xs text-white/40">Ref {mission.ref}</p>
+          <p className="mt-1 text-xs text-[#222]/40">Ref {mission.ref}</p>
 
-          <div className="mt-4 flex flex-wrap items-center gap-6 text-xs text-white/70">
-            <MetaItem icon={Calendar} label={mission.date} />
-            <MetaItem icon={Clock} label={mission.time} />
-            <MetaItem icon={MapPin} label={mission.location} />
+          <div className="mt-4 flex flex-wrap items-center gap-6 text-xs text-[#222]/70">
+            <MetaItem src="/calendar-gray.svg" label={mission.date} />
+            <MetaItem src="/clock-gray.svg" label={mission.time} />
+            <MetaItem src="/location-gray.svg" label={mission.location} />
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap gap-2 px-6 pt-4 lg:px-8">
+        <div className="mx-6 mt-4 flex flex-wrap gap-1 rounded-full bg-black/[0.03] p-1.5 lg:mx-8">
           {TABS.map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`rounded-full px-4 py-1.5 text-xs font-medium transition ${
+              className={`flex-1 rounded-full px-4 py-2 text-xs font-medium whitespace-nowrap transition ${
                 tab === t
                   ? "bg-gradient-to-r from-[#761c37] to-[#913f58] text-white"
-                  : "text-white/55 hover:text-white/80"
+                  : "text-[#222]/50 hover:text-[#222]/80"
               }`}
             >
               {t}
@@ -197,7 +210,7 @@ export function MissionDetailModal({
 
         {/* Body */}
         <div className="grid grid-cols-1 gap-5 p-6 lg:grid-cols-[1fr_300px] lg:p-8">
-          <div className="rounded-2xl border border-white/10 bg-[#1b0d0d] p-5">
+          <div className="rounded-2xl border border-black/5 bg-white p-5">
             {tab === "Overview" && <OverviewTab />}
             {tab === "Logistics" && <LogisticsTab />}
             {tab === "Activity" && <ActivityTab />}
@@ -209,8 +222,8 @@ export function MissionDetailModal({
 
           {/* Right sidebar */}
           <div className="flex flex-col gap-5">
-            <div className="rounded-2xl border border-white/10 bg-[#1b0d0d] p-4">
-              <p className="text-[11px] font-medium tracking-[0.18em] text-white/50 uppercase">
+            <div className="rounded-2xl border border-black/5 bg-white p-4">
+              <p className="text-[11px] font-medium tracking-[0.18em] text-[#222]/40 uppercase">
                 Your Concierge
               </p>
               <div className="mt-3 flex items-center gap-3">
@@ -222,41 +235,42 @@ export function MissionDetailModal({
                     height={40}
                     className="size-10 rounded-full object-cover"
                   />
-                  <span className="absolute right-0 bottom-0 size-2.5 rounded-full border-2 border-[#1b0d0d] bg-[#2bb673]" />
+                  <span className="absolute right-0 bottom-0 size-2.5 rounded-full border-2 border-white bg-[#2bb673]" />
                 </div>
                 <div className="leading-tight">
-                  <p className="text-sm font-medium text-white">Marcus Reed</p>
-                  <p className="text-[11px] text-white/50">Medical Concierge</p>
+                  <p className="text-sm font-medium text-[#222]">Marcus Reed</p>
+                  <p className="text-[11px] text-[#222]/50">Medical Concierge</p>
                 </div>
               </div>
-              <button className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-black/5 bg-white px-3 py-2 text-xs font-medium text-[#222] shadow-sm">
-                <span className="grid size-5 place-items-center rounded-full bg-[#222] text-white">
-                  <MessageSquare className="size-3" />
-                </span>
+              <button className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-[#fdeedd] px-3 py-2.5 text-xs font-medium text-[#222]">
+                <Image src="/figma/message-gray.svg" alt="" width={15} height={15} />
                 Message
               </button>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-[#1b0d0d] p-4">
-              <p className="text-[11px] font-medium tracking-[0.18em] text-white/50 uppercase">
+            <div className="rounded-2xl border border-black/5 bg-white p-4">
+              <p className="text-[11px] font-medium tracking-[0.18em] text-[#222]/40 uppercase">
                 Payment Summary
               </p>
-              <dl className="mt-3 flex flex-col gap-2 text-xs text-white/60">
+              <dl className="mt-3 flex flex-col gap-2 text-xs text-[#222]/60">
                 <Row k="Subtotal" v="USD 12,500" />
                 <Row k="Add-ons" v="USD 850" />
               </dl>
-              <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-3 text-sm">
-                <span className="text-white">TOTAL</span>
-                <span className="font-serif text-lg">
-                  AED <span className="text-[#f4c481]">13,350</span>
+              <div className="mt-3 flex items-center justify-between border-t border-black/5 pt-3 text-sm">
+                <span className="font-medium text-[#222] uppercase">TOTAL</span>
+                <span className="text-sm">
+                  USD{" "}
+                  <span className="font-serif text-lg text-[#761c37]">
+                    12,500
+                  </span>
                 </span>
               </div>
-              <dl className="mt-3 flex flex-col gap-2 border-t border-white/10 pt-3 text-xs text-white/60">
+              <dl className="mt-3 flex flex-col gap-2 border-t border-black/5 pt-3 text-xs text-[#222]/60">
                 <Row k="Method" v="Visa •••• 4417" />
                 <div className="flex items-center justify-between">
                   <dt>Status</dt>
                   <dd>
-                    <span className="rounded-full bg-[#2bb673]/20 px-2.5 py-0.5 text-[10px] font-medium text-[#4ad991]">
+                    <span className="rounded-full bg-[#dcf5e6] px-2.5 py-0.5 text-[10px] font-medium text-[#1f9d5c]">
                       Paid
                     </span>
                   </dd>
@@ -270,17 +284,17 @@ export function MissionDetailModal({
   );
 }
 
-function MetaItem({
-  icon: Icon,
-  label,
-}: {
-  icon: typeof Calendar;
-  label: string;
-}) {
+const BADGE_STYLES: Record<string, string> = {
+  "Clinic Confirmed": "bg-[#fcdddb] text-[#b23a4e]",
+  "In Preparation": "bg-[#fff4e5] text-[#9a6a1b]",
+  "Request Received": "bg-[#f3f3f3] text-[#6b6b6b]",
+};
+
+function MetaItem({ src, label }: { src: string; label: string }) {
   return (
-    <span className="flex items-center gap-2">
-      <span className="grid size-7 place-items-center rounded-full bg-[#761c37]/40 text-[#f4c481]">
-        <Icon className="size-3.5" />
+    <span className="flex items-center gap-2 text-[#222]/70">
+      <span className="grid size-7 place-items-center rounded-full bg-black/5">
+        <Image src={src} alt="" width={14} height={14} />
       </span>
       {label}
     </span>
@@ -291,7 +305,7 @@ function Row({ k, v }: { k: string; v: string }) {
   return (
     <div className="flex items-center justify-between">
       <dt>{k}</dt>
-      <dd className="text-white">{v}</dd>
+      <dd className="font-medium text-[#222]">{v}</dd>
     </div>
   );
 }
@@ -301,28 +315,28 @@ function OverviewTab() {
     <div>
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-sm font-semibold tracking-wide text-white">
-            LIVE MISSION TIMELINE
+          <h3 className="text-sm font-semibold tracking-wide text-[#222] uppercase">
+            Live Mission Timeline
           </h3>
-          <p className="text-xs text-[#f4c481]">
+          <p className="text-xs text-[#c98a4b]">
             Current stage: Chauffeur Assigned
           </p>
         </div>
-        <span className="rounded-full bg-[#fff4e5] px-3 py-1 text-[10px] font-medium text-[#9a6a1b]">
+        <span className="shrink-0 rounded-full bg-[#fff4e5] px-3 py-1 text-[10px] font-medium text-[#9a6a1b]">
           In Progress
         </span>
       </div>
 
       <ol className="relative mt-5 flex flex-col gap-5 pl-1">
-        <span className="absolute top-2 bottom-2 left-[9px] w-px bg-white/10" />
+        <span className="absolute top-2 bottom-2 left-[9px] w-px bg-black/10" />
         {TIMELINE.map((t) => (
           <li key={t.title} className="relative flex gap-3">
-            <span className="z-10 mt-0.5 grid size-[18px] shrink-0 place-items-center rounded-full bg-[#f4c481] text-[#2a1206]">
+            <span className="z-10 mt-0.5 grid size-[18px] shrink-0 place-items-center rounded-full bg-[#eabe83] text-white">
               <Check className="size-3" strokeWidth={3} />
             </span>
             <div className="leading-snug">
-              <p className="text-sm font-medium text-white">{t.title}</p>
-              {t.desc && <p className="text-xs text-white/50">{t.desc}</p>}
+              <p className="text-sm font-medium text-[#222]">{t.title}</p>
+              {t.desc && <p className="text-xs text-[#222]/50">{t.desc}</p>}
             </div>
           </li>
         ))}
@@ -339,15 +353,15 @@ function LogisticsTab() {
         return (
           <div
             key={l.label}
-            className="rounded-xl border border-white/10 bg-[#241414] p-4"
+            className="rounded-xl border border-black/5 bg-[#faf7f1] p-4"
           >
-            <div className="flex items-center gap-2 text-[11px] font-medium tracking-[0.15em] text-white/60 uppercase">
-              <Icon className="size-4 text-[#f4c481]" />
+            <div className="flex items-center gap-2 text-[11px] font-medium tracking-[0.15em] text-[#222]/50 uppercase">
+              <Icon className="size-4 text-[#c98a4b]" />
               {l.label}
             </div>
-            <p className="mt-3 text-sm font-medium text-white">{l.name}</p>
-            <p className="text-xs text-white/50">{l.line1}</p>
-            {l.line2 && <p className="text-xs text-white/50">{l.line2}</p>}
+            <p className="mt-3 text-sm font-medium text-[#222]">{l.name}</p>
+            <p className="text-xs text-[#222]/50">{l.line1}</p>
+            {l.line2 && <p className="text-xs text-[#222]/50">{l.line2}</p>}
           </div>
         );
       })}
@@ -358,13 +372,13 @@ function LogisticsTab() {
 function ActivityTab() {
   return (
     <ol className="relative flex flex-col gap-5 pl-1">
-      <span className="absolute top-2 bottom-2 left-[5px] w-px bg-white/10" />
+      <span className="absolute top-2 bottom-2 left-[5px] w-px bg-black/10" />
       {ACTIVITY.map((a, i) => (
         <li key={i} className="relative flex gap-3">
           <span className="z-10 mt-1 size-2.5 shrink-0 rounded-full bg-[#761c37] ring-4 ring-[#761c37]/15" />
           <div className="leading-snug">
-            <p className="text-xs text-white/40">{a.meta}</p>
-            <p className="text-sm font-medium text-white">{a.title}</p>
+            <p className="text-xs text-[#222]/40">{a.meta}</p>
+            <p className="text-sm font-medium text-[#222]">{a.title}</p>
           </div>
         </li>
       ))}
@@ -378,18 +392,18 @@ function DocumentTab() {
       {DOCUMENTS.map((d) => (
         <div
           key={d.title}
-          className="flex items-center gap-3 rounded-xl border border-white/10 bg-[#241414] p-3"
+          className="flex items-center gap-3 rounded-xl border border-black/5 bg-[#faf7f1] p-3"
         >
-          <span className="grid size-10 place-items-center rounded-lg bg-[#761c37]/20 text-[#f4c481]">
+          <span className="grid size-10 place-items-center rounded-lg bg-[#fdeedd] text-[#c98a4b]">
             <FileText className="size-5" />
           </span>
           <div className="flex-1 leading-tight">
-            <p className="text-sm font-medium text-white">{d.title}</p>
-            <p className="text-xs text-white/50">
+            <p className="text-sm font-medium text-[#222]">{d.title}</p>
+            <p className="text-xs text-[#222]/50">
               {d.type} · {d.size}
             </p>
           </div>
-          <button className="grid size-8 place-items-center rounded-lg bg-white/5 text-white/70 hover:bg-white/10">
+          <button className="grid size-8 place-items-center rounded-lg bg-black/5 text-[#222]/60 hover:bg-black/10">
             <Eye className="size-4" />
           </button>
           <button className="grid size-8 place-items-center rounded-lg bg-gradient-to-r from-[#761c37] to-[#913f58] text-white">
@@ -419,22 +433,22 @@ function BookingTab({ mission }: { mission: ModalMission }) {
   ];
   return (
     <div className="flex flex-col gap-5">
-      <dl className="flex flex-col divide-y divide-white/5 text-sm">
+      <dl className="flex flex-col divide-y divide-black/5 text-sm">
         {rows.map(([k, v]) => (
           <div key={k} className="flex items-center justify-between py-2.5">
-            <dt className="text-white/50">{k}</dt>
-            <dd className="font-medium text-white">{v}</dd>
+            <dt className="text-[#222]/50">{k}</dt>
+            <dd className="font-medium text-[#222]">{v}</dd>
           </div>
         ))}
       </dl>
       <div>
-        <p className="text-[11px] font-medium tracking-[0.18em] text-[#f4c481] uppercase">
+        <p className="text-[11px] font-medium tracking-[0.18em] text-[#c98a4b] uppercase">
           Inclusions
         </p>
-        <div className="mt-3 grid grid-cols-1 gap-2 text-sm text-white/80 sm:grid-cols-2">
+        <div className="mt-3 grid grid-cols-1 gap-2 text-sm text-[#222]/80 sm:grid-cols-2">
           {inclusions.map((item) => (
             <span key={item} className="flex items-center gap-2">
-              <Check className="size-4 text-[#f4c481]" /> {item}
+              <Check className="size-4 text-[#c98a4b]" /> {item}
             </span>
           ))}
         </div>

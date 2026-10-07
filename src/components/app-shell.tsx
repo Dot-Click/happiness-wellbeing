@@ -1,17 +1,6 @@
 "use client";
 
-import {
-  Bell,
-  ChevronRight,
-  CreditCard,
-  FileText,
-  LogOut,
-  Moon,
-  Palette,
-  Receipt,
-  Settings as SettingsIcon,
-  Sun,
-} from "lucide-react";
+import { Bell, ChevronRight, LogOut } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -205,31 +194,31 @@ function UserMenuDropdown({
 
   const MENU = [
     {
-      icon: FileText,
+      icon: "/figma/icons/reference.svg",
       label: "Reference",
       sub: "HE-260923-0849",
       href: "/missions",
     },
     {
-      icon: Receipt,
+      icon: "/figma/icons/my-bookings.svg",
       label: "My Bookings",
       sub: "View upcoming",
       href: "/missions",
     },
     {
-      icon: FileText,
+      icon: "/figma/icons/documents.svg",
       label: "Documents",
       sub: "Encrypted intake",
       href: "/vault",
     },
     {
-      icon: CreditCard,
+      icon: "/figma/icons/payment-methods.svg",
       label: "Payment Methods",
       sub: "Wire + card on file",
       href: "/settings",
     },
     {
-      icon: SettingsIcon,
+      icon: "/figma/icons/settings.svg",
       label: "Settings",
       sub: "Preferences",
       href: "/settings",
@@ -259,9 +248,7 @@ function UserMenuDropdown({
         />
         <div className="flex flex-col leading-tight">
           <span className="text-sm font-medium">Daniel Williamson</span>
-          <span
-            className={`text-[11px] ${dark ? "text-white/50" : "text-[#222]/50"}`}
-          >
+          <span className="text-[11px] text-[#913F58]">
             danielwilliams@mail.com
           </span>
         </div>
@@ -269,7 +256,7 @@ function UserMenuDropdown({
 
       {/* Menu items */}
       <ul className="flex flex-col p-2">
-        {MENU.map(({ icon: Icon, label, sub, href }) => (
+        {MENU.map(({ icon, label, sub, href }) => (
           <li key={label}>
             <button
               onClick={() => {
@@ -280,9 +267,7 @@ function UserMenuDropdown({
                 dark ? "hover:bg-white/5" : "hover:bg-black/5"
               }`}
             >
-              <Icon
-                className={`size-4 ${dark ? "text-white/60" : "text-[#222]/60"}`}
-              />
+              <Image src={icon} alt="" width={32} height={32} className="size-8 shrink-0" />
               <span className="flex-1">
                 <span className="block font-medium">{label}</span>
                 <span
@@ -300,14 +285,13 @@ function UserMenuDropdown({
 
         {/* Theme toggle */}
         <li>
-          <button
-            onClick={toggle}
-            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-xs transition ${
-              dark ? "hover:bg-white/5" : "hover:bg-black/5"
-            }`}
-          >
-            <Palette
-              className={`size-4 ${dark ? "text-white/60" : "text-[#222]/60"}`}
+          <div className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-xs">
+            <Image
+              src="/figma/icons/theme.svg"
+              alt=""
+              width={32}
+              height={32}
+              className="size-8 shrink-0"
             />
             <span className="flex-1">
               <span className="block font-medium">Theme</span>
@@ -317,12 +301,20 @@ function UserMenuDropdown({
                 {theme === "dark" ? "Dark" : "Light"} · tap to switch
               </span>
             </span>
-            {theme === "dark" ? (
-              <Moon className="size-3.5 text-[#f4c481]" />
-            ) : (
-              <Sun className="size-3.5 text-[#f4c481]" />
-            )}
-          </button>
+            <button
+              onClick={toggle}
+              aria-label="Toggle theme"
+              className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition ${
+                theme === "dark" ? "bg-[#761c37]" : "bg-black/15"
+              }`}
+            >
+              <span
+                className={`absolute left-0.5 inline-flex size-4 items-center justify-center rounded-full bg-white shadow transition-transform ${
+                  theme === "dark" ? "translate-x-4" : "translate-x-0"
+                }`}
+              />
+            </button>
+          </div>
         </li>
       </ul>
 
@@ -353,7 +345,7 @@ function Footer({ dark }: { dark: boolean }) {
       className={`flex flex-wrap items-center justify-between gap-3 px-6 py-5 text-xs lg:px-10 ${
         dark
           ? "bg-[#1a0b0b]/70 text-white/60"
-          : "border-t border-black/5 bg-white/60 text-[#222]/60"
+          : "border-t border-black/5 bg-[#E9DFD5] text-[#222]/60"
       }`}
     >
       <p>&copy; 2026 Happiness Experience. Private client platform.</p>

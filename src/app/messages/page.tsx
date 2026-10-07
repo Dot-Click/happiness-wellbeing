@@ -46,7 +46,7 @@ export default function MessagesPage() {
 
         <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-28 pb-12 lg:grid-cols-[320px_1fr] lg:px-10">
           {/* Conversation list */}
-          <aside className="h-fit rounded-2xl border border-black/5 bg-white p-4 shadow-sm">
+          <aside className="h-fit rounded-2xl border border-black/5 bg-white p-4">
             <h1 className="font-serif text-2xl text-[#222]">Messages</h1>
             <p className="text-xs text-[#222]/50">
               Chat with your Concierge and care team
@@ -97,7 +97,7 @@ export default function MessagesPage() {
           </aside>
 
           {/* Thread */}
-          <div className="flex min-h-[560px] flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm">
+          <div className="flex min-h-[560px] flex-col overflow-hidden rounded-2xl border border-black/5 bg-white">
             <div className="flex items-center justify-between border-b border-black/5 p-4">
               <div className="flex items-center gap-3">
                 <Image
