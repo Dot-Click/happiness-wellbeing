@@ -224,7 +224,7 @@ function UserMenuDropdown({
       icon: "/figma/icons/payment-methods.svg",
       label: "Payment Methods",
       sub: "Wire + card on file",
-      href: "/settings",
+      href: "/payment",
     },
     {
       icon: "/figma/icons/settings.svg",

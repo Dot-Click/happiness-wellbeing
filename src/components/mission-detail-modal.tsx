@@ -4,7 +4,6 @@ import {
   Car,
   Check,
   Download,
-  Eye,
   FileText,
   FlaskConical,
   Languages,
@@ -13,6 +12,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { IoEye } from "react-icons/io5";
 
 const TABS = [
   "Overview",
@@ -404,7 +404,7 @@ function DocumentTab() {
             </p>
           </div>
           <button className="grid size-8 place-items-center rounded-lg bg-black/5 text-[#222]/60 hover:bg-black/10">
-            <Eye className="size-4" />
+            <IoEye className="size-4" />
           </button>
           <button className="grid size-8 place-items-center rounded-lg bg-gradient-to-r from-[#761c37] to-[#913f58] text-white">
             <Download className="size-4" />

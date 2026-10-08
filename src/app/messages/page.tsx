@@ -1,13 +1,13 @@
 "use client";
 
-import { MoreVertical, Paperclip, Search, Send } from "lucide-react";
+import { CheckCheck, MoreVertical, Paperclip, Search, Send, Video } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { AppShell } from "@/components/app-shell";
 
 const CONVERSATIONS = [
-  { name: "Marcus Reed", role: "Medical Concierge", time: "05:34 PM", unread: true, avatar: "/figma/avatar-marcus.png" },
-  { name: "Olivia Bennett", role: "Executive Concierge", time: "05:34 PM", avatar: "/figma/avatar-daniel2.png" },
+  { name: "Marcus Reed", role: "Medical Concierge", time: "05:34 PM", online: true, avatar: "/figma/avatar-marcus.png" },
+  { name: "Olivia Bennett", role: "Executive Concierge", time: "05:34 PM", online: true, avatar: "/figma/avatar-daniel2.png" },
   { name: "Daniel Brooks", role: "Care Coordinator", time: "05:34 PM", avatar: "/figma/avatar-daniel.png" },
   { name: "James Anderson", role: "Travel & Care Coordinator", time: "05:34 PM", avatar: "/figma/avatar-marcus.png" },
   { name: "Sophia Laurent", role: "Senior Medical Concierge", time: "05:34 PM", avatar: "/figma/avatar-daniel2.png" },
@@ -23,7 +23,7 @@ const THREAD = [
   {
     from: "them",
     text: "Noted, and much appreciated for the detail. I'll coordinate this with the clinic directly.",
-    time: "✓ Marcus Reed · 11:06 AM",
+    time: "Marcus Reed · 11:06 AM",
   },
   {
     from: "me",
@@ -41,12 +41,13 @@ export default function MessagesPage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image src="/figma/hero-city.png" alt="" fill className="object-cover" />
-          <div className="absolute inset-0 bg-[#faf6f0]/25" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
         </div>
 
-        <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-28 pb-12 lg:grid-cols-[320px_1fr] lg:px-10">
+        <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-5 px-6 pt-28 pb-12 lg:grid-cols-[320px_1fr] lg:items-stretch lg:px-10">
           {/* Conversation list */}
-          <aside className="h-fit rounded-2xl border border-black/5 bg-white p-4">
+          <aside className="flex h-[560px] flex-col rounded-2xl border border-black/5 bg-white p-4 shadow-[0_12px_24px_-8px_rgba(0,0,0,0.15)]">
             <h1 className="font-serif text-2xl text-[#222]">Messages</h1>
             <p className="text-xs text-[#222]/50">
               Chat with your Concierge and care team
@@ -55,18 +56,18 @@ export default function MessagesPage() {
               <Search className="pointer-events-none absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#222]/40" />
               <input
                 placeholder="Search conversations..."
-                className="h-9 w-full rounded-full border border-black/10 bg-black/5 pr-3 pl-9 text-xs outline-none placeholder:text-[#222]/40"
+                className="h-9 w-full rounded-full border border-black/10 bg-transparent pr-3 pl-9 text-xs outline-none placeholder:text-[#222]/40"
               />
             </div>
-            <ul className="mt-3 flex max-h-[500px] flex-col gap-1 overflow-y-auto">
+            <ul className="mt-3 -mx-4 flex flex-1 flex-col overflow-y-auto">
               {CONVERSATIONS.map((c, i) => (
-                <li key={i}>
+                <li key={i} className="border-b border-black/5 last:border-b-0">
                   <button
                     onClick={() => setActiveIdx(i)}
-                    className={`flex w-full items-center gap-2.5 rounded-xl p-2 text-left transition ${
+                    className={`flex w-full items-center gap-2.5 border-l-[3px] px-4 py-3 text-left transition ${
                       i === activeIdx
-                        ? "bg-[#f6e4ea]"
-                        : "hover:bg-black/5"
+                        ? "border-[#761c37] bg-gradient-to-r from-[#f6e4ea] to-transparent"
+                        : "border-transparent hover:bg-black/5"
                     }`}
                   >
                     <div className="relative">
@@ -77,8 +78,8 @@ export default function MessagesPage() {
                         height={36}
                         className="size-9 rounded-full object-cover"
                       />
-                      {c.unread && (
-                        <span className="absolute right-0 bottom-0 size-2 rounded-full border border-white bg-[#2bb673]" />
+                      {c.online && (
+                        <span className="absolute right-0 bottom-0 size-2.5 rounded-full border-2 border-white bg-[#2bb673]" />
                       )}
                     </div>
                     <div className="flex-1 leading-tight">
@@ -97,16 +98,21 @@ export default function MessagesPage() {
           </aside>
 
           {/* Thread */}
-          <div className="flex min-h-[560px] flex-col overflow-hidden rounded-2xl border border-black/5 bg-white">
+          <div className="flex h-[500px] flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-[0_12px_24px_-8px_rgba(0,0,0,0.15)] lg:self-end">
             <div className="flex items-center justify-between border-b border-black/5 p-4">
               <div className="flex items-center gap-3">
-                <Image
-                  src={CONVERSATIONS[activeIdx].avatar}
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="size-10 rounded-full object-cover"
-                />
+                <div className="relative">
+                  <Image
+                    src={CONVERSATIONS[activeIdx].avatar}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="size-10 rounded-full object-cover"
+                  />
+                  {CONVERSATIONS[activeIdx].online && (
+                    <span className="absolute right-0 bottom-0 size-2.5 rounded-full border-2 border-white bg-[#2bb673]" />
+                  )}
+                </div>
                 <div className="leading-tight">
                   <p className="text-sm font-medium text-[#222]">
                     {CONVERSATIONS[activeIdx].name}
@@ -115,13 +121,19 @@ export default function MessagesPage() {
                     {CONVERSATIONS[activeIdx].role}
                   </p>
                 </div>
-                <span className="ml-3 rounded-full bg-[#f6e4ea] px-2.5 py-0.5 text-[10px] font-medium text-[#761c37]">
-                  Mission HE-260923-0848
-                </span>
+                <button className="ml-3 rounded-full border border-[#E1B068] bg-[#FFF4E0] px-2.5 py-1 text-[11px] font-medium text-[#AD8751] underline underline-offset-2">
+                  Mission HE-260925-0848
+                </button>
               </div>
-              <button className="rounded-full p-1.5 text-[#222]/40 hover:bg-black/5">
-                <MoreVertical className="size-4" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button className="flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#4C81ED] to-[#0055FF] px-3 py-1.5 text-xs font-medium text-white">
+                  <Video className="size-3.5 fill-current" />
+                  Zoom Call
+                </button>
+                <button className="rounded-full p-1.5 text-[#222]/40 hover:bg-black/5">
+                  <MoreVertical className="size-4" />
+                </button>
+              </div>
             </div>
 
             <div className="flex flex-1 flex-col gap-3 overflow-y-auto p-5">
@@ -136,30 +148,40 @@ export default function MessagesPage() {
                       className={`max-w-sm rounded-2xl px-4 py-2.5 text-xs leading-snug ${
                         mine
                           ? "bg-gradient-to-r from-[#761c37] to-[#913f58] text-white"
-                          : "bg-[#f6e4ea] text-[#222]"
+                          : "bg-[#f3f3f4] text-[#222]"
                       }`}
                     >
                       {m.text}
                     </div>
-                    <span className="text-[10px] text-[#222]/40">
-                      {m.time}
+                    <span className="flex items-center gap-1 text-[10px] text-[#222]/40">
+                      {mine ? (
+                        <>
+                          {m.time}
+                          <CheckCheck className="size-3 text-[#761c37]/70" />
+                        </>
+                      ) : (
+                        <>
+                          <CheckCheck className="size-3 text-[#222]/40" />
+                          {m.time}
+                        </>
+                      )}
                     </span>
                   </div>
                 );
               })}
             </div>
 
-            <div className="flex items-center gap-2 border-t border-black/5 p-3">
+            <div className="flex items-center gap-2 border-t border-black/5 bg-[#FDFBF9] p-3">
               <input
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 placeholder="Write a message to your concierge..."
-                className="h-10 flex-1 rounded-full border border-black/10 bg-black/5 px-4 text-xs outline-none placeholder:text-[#222]/40"
+                className="h-10 flex-1 rounded-xl border border-black/10 bg-black/5 px-4 text-xs outline-none placeholder:text-[#222]/40"
               />
-              <button className="grid size-9 place-items-center rounded-full bg-black/5 text-[#222]/60">
+              <button className="grid size-9 place-items-center rounded-xl bg-black/5 text-[#222]/60">
                 <Paperclip className="size-4" />
               </button>
-              <button className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#761c37] to-[#913f58] px-4 py-2 text-xs font-medium text-white">
+              <button className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#761c37] to-[#913f58] px-4 py-2 text-xs font-medium text-white">
                 Send <Send className="size-3" />
               </button>
             </div>

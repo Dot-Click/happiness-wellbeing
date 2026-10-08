@@ -16,12 +16,23 @@ import {
 const TOTAL_STEPS = 4;
 
 const INTERESTS = [
-  { id: "health", label: "Health & Vitality", icon: "/figma/icon-heart.png" },
-  { id: "mind", label: "Mind & Serenity", icon: "/figma/icon-lotus.png" },
+  {
+    id: "health",
+    label: "Health & Vitality",
+    icon: "/figma/heart.svg",
+    iconActive: "/figma/heart-white.svg",
+  },
+  {
+    id: "mind",
+    label: "Mind & Serenity",
+    icon: "/figma/lotus.svg",
+    iconActive: "/figma/lotus-white.svg",
+  },
   {
     id: "business",
     label: "Business & Logistics",
-    icon: "/figma/icon-briefcase.png",
+    icon: "/figma/briefcase.svg",
+    iconActive: "/figma/briefcase-white.svg",
   },
 ] as const;
 
@@ -285,7 +296,7 @@ export default function OnboardingPage() {
             description="This helps personalize discovery only. It does not limit what you can explore or book."
           />
           <div className="flex gap-2.5">
-            {INTERESTS.map(({ id, label, icon }) => {
+            {INTERESTS.map(({ id, label, icon, iconActive }) => {
               const active = interest === id;
               return (
                 <button
@@ -298,7 +309,12 @@ export default function OnboardingPage() {
                       : "border-[#e8e2e2] bg-white"
                   }`}
                 >
-                  <Image src={icon} alt="" width={40} height={40} />
+                  <Image
+                    src={active ? iconActive : icon}
+                    alt=""
+                    width={40}
+                    height={40}
+                  />
                   <span
                     className={`text-xs leading-tight ${
                       active ? "text-white" : "text-[#222]"

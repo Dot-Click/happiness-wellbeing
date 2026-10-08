@@ -72,8 +72,11 @@ export function Label({ children }: { children: ReactNode }) {
 const FIELD_BASE =
   "h-11 w-full rounded-xl border border-black/10 bg-white px-3.5 text-sm tracking-wide text-[#222] outline-none placeholder:font-light placeholder:text-[rgba(34,34,34,0.42)] focus:border-[#761c37] focus:ring-2 focus:ring-[#761c37]/15";
 
-export function TextInput(props: InputHTMLAttributes<HTMLInputElement>) {
-  return <input className={FIELD_BASE} {...props} />;
+export function TextInput({
+  className = "",
+  ...props
+}: InputHTMLAttributes<HTMLInputElement>) {
+  return <input className={`${FIELD_BASE} ${className}`} {...props} />;
 }
 
 export function Select({

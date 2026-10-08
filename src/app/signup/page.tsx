@@ -25,7 +25,7 @@ export default function SignUpPage() {
             <div className="relative shrink-0">
               <select
                 defaultValue="+1"
-                className="h-11 w-16 appearance-none rounded-xl border border-black/10 bg-white pr-4 pl-3 text-center text-sm font-medium text-[#222] outline-none"
+                className="h-11 w-16 appearance-none rounded-xl border border-black/10 bg-white pr-5 pl-2 text-center text-sm font-medium text-[#222] outline-none"
               >
                 <option>+1</option>
                 <option>+44</option>

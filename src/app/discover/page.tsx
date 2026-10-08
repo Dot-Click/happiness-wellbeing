@@ -62,7 +62,7 @@ const EXPERIENCES = [
     price: "$150.00 USD",
     duration: "1 Day",
     location: "New York",
-    img: "/figma/card-executive-health.png",
+    img: "/figma/card-health2.png",
   },
   {
     tag: "Preventive Medicine",
@@ -71,7 +71,7 @@ const EXPERIENCES = [
     price: "$150.00 USD",
     duration: "1 Day",
     location: "New York",
-    img: "/figma/card-preventive.png",
+    img: "/figma/card-international.png",
   },
   {
     tag: "Restorative",
@@ -80,7 +80,7 @@ const EXPERIENCES = [
     price: "$150.00 USD",
     duration: "1 Day",
     location: "New York",
-    img: "/figma/card-serenity.png",
+    img: "/figma/card-corporate.png",
   },
   {
     tag: "Executive Screening",
@@ -249,13 +249,13 @@ export default function DiscoverPage() {
 
                 <div className="mt-2 flex flex-col gap-3 text-xs">
                   <div className="flex items-center gap-3">
-                    <Image src="/clock.svg" alt="" width={28} height={28} className="shrink-0" />
+                    <Image src="/clock.svg" alt="" width={16} height={16} className="size-4 shrink-0" />
                     <span className={dark ? "text-white" : "text-[#222]"}>
                       2026-10-11 · 09:00 AM
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <FilledPin className="size-7 shrink-0 text-[#EABE83]" />
+                    <FilledPin className="size-4 shrink-0 text-[#EABE83]" />
                     <span className={dark ? "text-white" : "text-[#222]"}>
                       New York
                     </span>
@@ -268,14 +268,14 @@ export default function DiscoverPage() {
               </div>
 
               {/* Right: timeline */}
-              <div className="flex flex-col gap-3">
-                <p className="text-[11px] font-medium tracking-[0.2em] text-[#f4c481] uppercase">
+              <div className="flex flex-col gap-4">
+                <p className="text-[11px] font-medium tracking-[0.2em] text-[#c98a4b] uppercase">
                   Clinic Confirmed
                 </p>
-                <ol className="relative flex flex-col gap-3">
+                <ol className="relative flex flex-col gap-5">
                   {/* Vertical connector */}
                   <span
-                    className={`absolute top-2 bottom-2 left-[7px] w-px ${
+                    className={`absolute top-2 bottom-2 left-[9px] w-px ${
                       dark ? "bg-white/15" : "bg-black/10"
                     }`}
                   />
@@ -285,30 +285,33 @@ export default function DiscoverPage() {
                       className="relative flex items-start gap-3"
                     >
                       <span
-                        className={`relative z-10 mt-0.5 grid size-5 shrink-0 place-items-center rounded-full border-2 ${
+                        className={`relative z-10 mt-0.5 grid size-[18px] shrink-0 place-items-center rounded-full border ${
                           step.state === "done"
                             ? "border-[#EABE83] bg-[#EABE83]"
                             : step.state === "current"
                               ? "border-[#761c37] bg-[#761c37]"
                               : dark
-                                ? "border-white/25 bg-[#1a0b0b]"
+                                ? "border-white/25 bg-transparent"
                                 : "border-black/15 bg-white"
                         }`}
                       >
                         {step.state === "done" && (
-                          <Check className="size-3 text-white" strokeWidth={3} />
+                          <Check
+                            className="size-2.5 text-white"
+                            strokeWidth={3}
+                          />
                         )}
                         {step.state === "current" && (
-                          <span className="block size-2 rounded-full bg-white" />
+                          <span className="block size-1.5 rounded-full bg-white" />
                         )}
                       </span>
                       <div className="flex flex-col leading-tight">
                         <span
-                          className={`text-xs font-medium ${
+                          className={`text-sm font-semibold ${
                             step.state === "pending"
                               ? dark
-                                ? "text-white/40"
-                                : "text-[#222]/40"
+                                ? "text-white/60"
+                                : "text-[#222]/60"
                               : dark
                                 ? "text-white"
                                 : "text-[#222]"
@@ -318,7 +321,7 @@ export default function DiscoverPage() {
                         </span>
                         {step.sub && (
                           <span
-                            className={`text-[11px] ${dark ? "text-white/50" : "text-[#222]/50"}`}
+                            className={`text-xs ${dark ? "text-white/50" : "text-[#222]/50"}`}
                           >
                             {step.sub}
                           </span>
@@ -381,7 +384,7 @@ export default function DiscoverPage() {
                   24/support
                 </span>
               </div>
-              <button className="mt-4 flex w-full items-center gap-2.5 rounded-full border border-black/10 bg-gradient-to-r from-white to-[#FBEFDE] px-4 py-2.5 text-xs font-semibold text-[#222]">
+              <button className="mt-4 flex w-full items-center gap-2.5 rounded-xl border border-black/10 bg-gradient-to-r from-white to-[#FBEFDE] px-4 py-2.5 text-xs font-semibold text-[#222]">
                 <Image src="/figma/message-gray.svg" alt="" width={16} height={16} />
                 Message Concierge
               </button>
@@ -443,7 +446,7 @@ export default function DiscoverPage() {
               alt=""
               fill
               className="object-cover"
-              style={{ objectPosition: "center" }}
+              style={{ objectPosition: "center 20%" }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[rgba(44,4,16,0.85)] via-[rgba(44,4,16,0.45)] to-[rgba(44,4,16,0.1)]" />
           </div>
