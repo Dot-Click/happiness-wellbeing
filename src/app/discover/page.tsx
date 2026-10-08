@@ -437,7 +437,7 @@ export default function DiscoverPage() {
       {/* Curated for you */}
       <section className="mx-auto max-w-6xl px-6 pb-12 lg:px-10">
         <Link
-          href="/reservation"
+          href="/experience/corporate-executive-health-day"
           className="relative block overflow-hidden rounded-[22px]"
         >
           <div className="relative h-[260px] w-full lg:h-[300px]">

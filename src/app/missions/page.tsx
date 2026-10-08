@@ -116,7 +116,7 @@ export default function MissionsPage() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(44,4,16,0.35) 0%, rgba(44,4,16,0.35) 55%, rgba(44,4,16,0.12) 80%, rgba(44,4,16,0) 92%)",
+                "linear-gradient(to bottom, rgba(44,4,16,0.7) 0%, rgba(44,4,16,0.55) 30%, rgba(44,4,16,0.6) 55%, rgba(44,4,16,0.3) 85%, rgba(44,4,16,0.1) 100%)",
             }}
           />
           <div
