@@ -19,11 +19,13 @@ export function AppShell({
   active,
   forceDark = false,
   lightNav = false,
+  hideNav = false,
 }: {
   children: ReactNode;
   active?: string;
   forceDark?: boolean;
   lightNav?: boolean;
+  hideNav?: boolean;
 }) {
   const { theme } = useTheme();
   const dark = forceDark || theme === "dark";
@@ -33,7 +35,9 @@ export function AppShell({
         dark ? "bg-[#120606] text-white" : "bg-[#faf6f0] text-[#222]"
       }`}
     >
-      <TopNav active={active} dark={dark} lightNav={lightNav && !dark} />
+      {!hideNav && (
+        <TopNav active={active} dark={dark} lightNav={lightNav && !dark} />
+      )}
       <main className="flex-1">{children}</main>
       <Footer dark={dark} />
     </div>

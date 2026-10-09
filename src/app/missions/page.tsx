@@ -6,9 +6,9 @@ import {
   Check,
   ChevronDown,
   Clock,
-  MapPin,
   MoreVertical,
 } from "lucide-react";
+import { IoLocationSharp } from "react-icons/io5";
 import Image from "next/image";
 import { useState } from "react";
 import { AppShell } from "@/components/app-shell";
@@ -228,7 +228,7 @@ export default function MissionsPage() {
                   </span>
                   <span className="flex items-center gap-2">
                     <span className="grid size-6 place-items-center rounded-full bg-[#fdeedd] text-[#c98a4b]">
-                      <MapPin className="size-3.5" />
+                      <IoLocationSharp className="size-3.5" />
                     </span>
                     {m.location}
                   </span>

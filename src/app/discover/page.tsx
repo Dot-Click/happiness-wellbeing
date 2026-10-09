@@ -1,28 +1,11 @@
 "use client";
 
 import { Check, HeadphonesIcon, ShieldCheck } from "lucide-react";
+import { IoLocationSharp } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { useTheme } from "@/components/theme-provider";
-
-/** Solid map-pin icon with a white punched-out dot, matching the reference mark. */
-function FilledPin({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
-        fill="currentColor"
-      />
-      <circle cx="12" cy="10" r="3" fill="white" />
-    </svg>
-  );
-}
 
 const SERVICES = [
   {
@@ -255,7 +238,7 @@ export default function DiscoverPage() {
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <FilledPin className="size-4 shrink-0 text-[#EABE83]" />
+                    <IoLocationSharp className="size-4 shrink-0 text-[#EABE83]" />
                     <span className={dark ? "text-white" : "text-[#222]"}>
                       New York
                     </span>
@@ -420,7 +403,7 @@ export default function DiscoverPage() {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#FBF4F5]">
-                    <FilledPin className="size-4 text-[#8A3750]" />
+                    <IoLocationSharp className="size-4 text-[#8A3750]" />
                   </span>
                   <span
                     className={`text-xs ${dark ? "text-white" : "text-[#222]"}`}
@@ -537,7 +520,7 @@ export default function DiscoverPage() {
                   <span
                     className={`flex items-center gap-1 ${dark ? "text-white/60" : "text-[#222]/60"}`}
                   >
-                    <FilledPin className="size-3 text-[#8A3750]" />
+                    <IoLocationSharp className="size-3 text-[#8A3750]" />
                     {e.location}
                   </span>
                   <Link

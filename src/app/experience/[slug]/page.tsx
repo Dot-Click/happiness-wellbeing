@@ -1,9 +1,15 @@
 "use client";
 
-import { ArrowLeft, Check, Clock, Crown, MapPin, Wallet } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
+import { FaCrown } from "react-icons/fa6";
+import { IoLocationSharp } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
+
+type StatIcon =
+  | { kind: "img"; src: string }
+  | { kind: "component"; Icon: React.ComponentType<{ className?: string }> };
 
 const INCLUDED = [
   "Private executive clinic",
@@ -102,10 +108,10 @@ const OTHER = [
 
 export default function ExperiencePage() {
   return (
-    <AppShell active="/discover" lightNav>
+    <AppShell active="/discover" lightNav hideNav>
       {/* Hero */}
-      <section className="relative mx-auto mt-20 max-w-6xl px-6 lg:px-10">
-        <div className="relative h-[380px] w-full overflow-hidden rounded-3xl lg:h-[440px]">
+      <section className="relative mx-auto mt-6 max-w-[1500px] px-4 lg:px-6">
+        <div className="relative h-[520px] w-full overflow-hidden rounded-3xl lg:h-[650px]">
           <Image
             src="/figma/card-international.png"
             alt=""
@@ -139,23 +145,59 @@ export default function ExperiencePage() {
 
       {/* Stats */}
       <section className="mx-auto mt-6 grid max-w-6xl grid-cols-2 gap-4 px-6 sm:grid-cols-4 lg:px-10">
-        {[
-          { icon: Wallet, label: "Investment", value: "AED 35,000" },
-          { icon: Clock, label: "Duration", value: "1 Day" },
-          { icon: MapPin, label: "Location", value: "Dubai" },
-          { icon: Crown, label: "Access", value: "Experience" },
-        ].map(({ icon: Icon, label, value }) => (
+        {(
+          [
+            {
+              icon: { kind: "img", src: "/figma/investment-icon.svg" },
+              label: "Investment",
+              value: "AED 35,000",
+            },
+            {
+              icon: { kind: "img", src: "/clock.svg" },
+              label: "Duration",
+              value: "1 Day",
+            },
+            {
+              icon: { kind: "component", Icon: IoLocationSharp },
+              label: "Location",
+              value: "Dubai",
+            },
+            {
+              icon: { kind: "component", Icon: FaCrown },
+              label: "Access",
+              value: "Experience",
+            },
+          ] satisfies { icon: StatIcon; label: string; value: string }[]
+        ).map(({ icon, label, value }) => (
           <div
             key={label}
-            className="flex flex-col items-center gap-2 rounded-2xl border border-black/5 bg-white p-5 text-center shadow-[0_10px_30px_-18px_rgba(0,0,0,0.2)]"
+            className="relative overflow-hidden rounded-2xl bg-[linear-gradient(to_right,rgba(252,250,246,0.78)_0%,#ffffff_100%)] px-6 py-10 text-center shadow-[0_18px_40px_-18px_rgba(0,0,0,0.18)]"
           >
-            <span className="grid size-10 place-items-center rounded-xl bg-[#761c37] text-white">
-              <Icon className="size-4" />
-            </span>
-            <p className="text-[11px] tracking-wide text-[#222]/50 uppercase">
-              {label}
-            </p>
-            <p className="text-sm font-medium text-[#222]">{value}</p>
+            <span
+              className="pointer-events-none absolute top-0 left-1/2 h-6 w-64 -translate-x-1/2 bg-[#faf6f0]"
+              style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)" }}
+            />
+            <div className="relative flex flex-col items-center justify-center gap-3">
+              {icon.kind === "img" ? (
+                <span
+                  className="size-7 bg-[#761c37]"
+                  style={{
+                    WebkitMaskImage: `url(${icon.src})`,
+                    maskImage: `url(${icon.src})`,
+                    WebkitMaskRepeat: "no-repeat",
+                    maskRepeat: "no-repeat",
+                    WebkitMaskSize: "contain",
+                    maskSize: "contain",
+                    WebkitMaskPosition: "center",
+                    maskPosition: "center",
+                  }}
+                />
+              ) : (
+                <icon.Icon className="size-7 text-[#761c37]" />
+              )}
+              <p className="mt-2 text-sm font-medium text-[#222]">{label}</p>
+              <p className="text-base text-[#222]/70">{value}</p>
+            </div>
           </div>
         ))}
       </section>
@@ -178,7 +220,7 @@ export default function ExperiencePage() {
           <ul className="mt-3 grid grid-cols-1 gap-y-2 text-sm text-[#222] sm:grid-cols-2">
             {INCLUDED.map((item) => (
               <li key={item} className="flex items-center gap-2">
-                <span className="grid size-4 place-items-center rounded-full bg-[#f3e0e5] text-[#761c37]">
+                <span className="grid size-4 place-items-center rounded-full bg-[#EABE83] text-white">
                   <Check className="size-2.5" strokeWidth={3} />
                 </span>
                 {item}
@@ -213,27 +255,56 @@ export default function ExperiencePage() {
             Reserve this experience
           </p>
           <p className="mt-1 font-serif text-xl text-[#222]">AED 12,500</p>
-          <div className="mt-4 flex flex-col gap-3 text-sm">
-            {[
-              { icon: Clock, label: "Duration", value: "1 Day" },
-              { icon: MapPin, label: "Location", value: "Dubai" },
-              {
-                icon: Clock,
-                label: "Selected date",
-                value: "October 08, 2026",
-              },
-            ].map(({ icon: Icon, label, value }) => (
+          <div className="mt-4 border-t border-black/5 pt-4 flex flex-col gap-4 text-sm">
+            {(
+              [
+                {
+                  kind: "mask",
+                  src: "/clock.svg",
+                  label: "Duration",
+                  value: "1 Day",
+                },
+                {
+                  kind: "component",
+                  Icon: IoLocationSharp,
+                  label: "Location",
+                  value: "Dubai",
+                },
+                {
+                  kind: "mask",
+                  src: "/calendar.svg",
+                  label: "Selected date",
+                  value: "October 08, 2026",
+                },
+              ] as const
+            ).map((row) => (
               <div
-                key={label}
+                key={row.label}
                 className="flex items-center justify-between gap-3"
               >
-                <span className="flex items-center gap-2 text-[#222]/60">
-                  <span className="grid size-6 place-items-center rounded-full bg-[#761c37] text-white">
-                    <Icon className="size-3" />
+                <span className="flex items-center gap-3 text-[#222]">
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#FBF4F5]">
+                    {row.kind === "mask" ? (
+                      <span
+                        className="size-4 bg-[#761c37]"
+                        style={{
+                          WebkitMaskImage: `url(${row.src})`,
+                          maskImage: `url(${row.src})`,
+                          WebkitMaskRepeat: "no-repeat",
+                          maskRepeat: "no-repeat",
+                          WebkitMaskSize: "contain",
+                          maskSize: "contain",
+                          WebkitMaskPosition: "center",
+                          maskPosition: "center",
+                        }}
+                      />
+                    ) : (
+                      <row.Icon className="size-4 text-[#761c37]" />
+                    )}
                   </span>
-                  {label}
+                  {row.label}
                 </span>
-                <span className="text-[#222]">{value}</span>
+                <span className="text-[#222]/60">{row.value}</span>
               </div>
             ))}
           </div>
@@ -245,7 +316,7 @@ export default function ExperiencePage() {
           </Link>
           <Link
             href="/messages"
-            className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-[#fbefde] py-3 text-sm font-medium text-[#222]"
+            className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FBF8F3] to-[#FAEAD3] py-3 text-sm font-medium text-[#222]"
           >
             <Image
               src="/figma/message-gray.svg"
@@ -260,7 +331,7 @@ export default function ExperiencePage() {
 
       {/* Optional Enhancements */}
       <section className="mx-auto mt-8 max-w-6xl px-6 lg:px-10">
-        <p className="text-[11px] font-medium tracking-[0.22em] text-[#222]/50 uppercase">
+        <p className="text-base font-medium tracking-[0.18em] text-[#222] uppercase">
           Optional enhancements
         </p>
         <div className="mt-4 flex flex-col divide-y divide-black/5 rounded-2xl bg-white px-5">
@@ -286,7 +357,7 @@ export default function ExperiencePage() {
 
       {/* Available dates */}
       <section className="mx-auto mt-8 max-w-6xl px-6 lg:px-10">
-        <p className="text-[11px] font-medium tracking-[0.22em] text-[#222]/50 uppercase">
+        <p className="text-base font-medium tracking-[0.18em] text-[#222] uppercase">
           Available dates
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -326,7 +397,7 @@ export default function ExperiencePage() {
               <p className="text-[11px] text-[#222]/50">Medical Concierge</p>
             </div>
           </div>
-          <button className="flex items-center gap-2 rounded-lg bg-[#fbefde] px-4 py-2 text-xs font-medium text-[#222]">
+          <button className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#FBF8F3] to-[#FAEAD3] px-6 py-2 text-xs font-medium text-[#222]">
             <Image
               src="/figma/message-gray.svg"
               alt=""
@@ -340,7 +411,7 @@ export default function ExperiencePage() {
 
       {/* Other experiences */}
       <section className="mx-auto mt-10 max-w-6xl px-6 pb-16 lg:px-10">
-        <p className="text-[11px] font-medium tracking-[0.22em] text-[#222]/50 uppercase">
+        <p className="text-base font-medium tracking-[0.18em] text-[#222] uppercase">
           Other experiences
         </p>
         <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
