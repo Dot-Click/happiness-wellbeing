@@ -1,126 +1,107 @@
 "use client";
 
-import {
-  Search,
-  TrendingUp,
-  CircleDot,
-  ArrowUpRight,
-  ArrowRight,
-  Clock,
-  MoreHorizontal,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { IoMdThumbsUp } from "react-icons/io";
 
 const STATS = [
   {
-    label: "VIP CLIENTS",
+    label: "VIP Clients",
     value: "48",
-    change: "+6 this month",
-    trend: "up" as const,
-    color: "#c98a4b",
+    sub: "+6 this month",
+    icon: "/figma/headphone.svg",
   },
   {
-    label: "PENDING REQUESTS",
+    label: "Pending Approvals",
     value: "7",
-    change: "Ready to review",
-    trend: "neutral" as const,
-    color: "#761c37",
+    sub: "Needs review",
+    icon: "thumb",
   },
   {
-    label: "ACTIVE EXPERIENCES",
+    label: "Documents Awaiting Review",
     value: "9",
-    change: "Across 4 cities",
-    trend: "up" as const,
-    color: "#0CAF72",
+    sub: "Secure vault",
+    icon: "/figma/document.svg",
   },
   {
-    label: "CLIENT SATISFACTION",
+    label: "Partner SLA",
     value: "98.4%",
-    change: "+1.2% vs last quarter",
-    trend: "up" as const,
-    color: "#c98a4b",
+    sub: "Healthy network",
+    icon: "/figma/group.svg",
   },
 ];
 
-const RECENT_MISSIONS = [
+const PRIORITY_REQUESTS = [
   {
-    client: "Ali Hamza",
-    avatar: "/figma/avatar-daniel.png",
-    mission: "Executive Health 360",
-    type: "Health & Wellness",
-    status: "In Progress",
-    priority: "UAE",
-    date: "Oct 10, 2026",
+    title: "Executive Health 360",
+    client: "Alexander Morgan",
+    tier: "VIP",
+    ref: "HE-260925-0847",
+    date: "2026-10-08",
+    amount: "AED 13,350",
   },
   {
+    title: "Executive Travel & Logistics",
     client: "Daniel Williamson",
-    avatar: "/figma/avatar-daniel2.png",
-    mission: "Corporate Buddy Package",
-    type: "Corporate & Logistics",
-    status: "Confirmed",
-    priority: "USA",
-    date: "Oct 8, 2026",
+    tier: "Corporate",
+    ref: "CB-261001-0091",
+    date: "2026-10-12",
+    amount: "USD 45,000",
   },
   {
+    title: "Alpine Serenity Retreat",
     client: "Olivia Bennett",
-    avatar: "/figma/avatar-marcus.png",
-    mission: "Executive Serenity Retreat",
-    type: "Wellness & Serenity",
-    status: "Pending",
-    priority: "UK",
-    date: "Oct 12, 2026",
+    tier: "VIP",
+    ref: "SE-260921-1123",
+    date: "2026-11-14",
+    amount: "USD 16,800",
   },
   {
-    client: "Marcus Reed",
-    avatar: "/figma/avatar-daniel.png",
-    mission: "Private Preventive Assessment",
-    type: "Medical & International Care",
-    status: "Completed",
-    priority: "Switzerland",
-    date: "Oct 5, 2026",
-  },
-  {
+    title: "Private Preventive Assessment",
     client: "Amelia Reed",
-    avatar: "/figma/avatar-daniel2.png",
-    mission: "International Medical Concierge",
-    type: "Executive Logistics",
-    status: "In Progress",
-    priority: "Germany",
-    date: "Oct 9, 2026",
+    tier: "Standard",
+    ref: "HV-261003-0017",
+    date: "2026-10-20",
+    amount: "AED 6,900",
   },
 ];
 
-const UPCOMING = [
+const CONCIERGE_CAPACITY = [
   {
-    time: "10:00 AM",
-    title: "Health screening — Ali Hamza",
-    location: "Partner Clinic, Dubai",
+    name: "Sophia Laurent",
+    specialty: "Medical & International Care",
+    load: "3 / 6",
   },
   {
-    time: "1:30 PM",
-    title: "Concierge debrief — Daniel Williamson",
-    location: "Virtual Meeting",
+    name: "Yuki Tanaka",
+    specialty: "Corporate & Logistics",
+    load: "5 / 6",
   },
   {
-    time: "4:00 PM",
-    title: "Serenity intake — Olivia Bennett",
-    location: "Wellness Centre, London",
+    name: "Sophia Laurent",
+    specialty: "Medical & International Care",
+    load: "3 / 6",
+  },
+  {
+    name: "Sophia Laurent",
+    specialty: "Medical & International Care",
+    load: "3 / 6",
   },
 ];
 
-function statusColor(status: string) {
-  switch (status) {
-    case "In Progress":
-      return "bg-[#FFF4E5] text-[#c98a4b]";
-    case "Confirmed":
-      return "bg-[#E6F9F0] text-[#0CAF72]";
-    case "Pending":
-      return "bg-[#FFF0F0] text-[#E5484D]";
-    case "Completed":
-      return "bg-[#F0F0F0] text-[#666]";
-    default:
-      return "bg-[#F0F0F0] text-[#666]";
-  }
+const AUTOMATION_HEALTH = [
+  { label: "SMS milestone triggers", status: "Active" },
+  { label: "Email confirmations", status: "Active" },
+  { label: "J-1 reminders", status: "Active" },
+];
+
+function SectionHeading({ title }: { title: string }) {
+  return (
+    <div className="mb-4">
+      <h2 className="text-base font-semibold text-[#222]">{title}</h2>
+      <div className="mt-1.5 h-0.5 w-8 rounded-full bg-[#c98a4b]" />
+    </div>
+  );
 }
 
 export default function DashboardPage() {
@@ -159,204 +140,99 @@ export default function DashboardPage() {
           {STATS.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-2xl border border-black/5 bg-white p-5"
+              className="relative overflow-hidden rounded-2xl border border-black/5 bg-white p-5"
             >
-              <p
-                className="text-[11px] font-semibold uppercase tracking-[0.12em]"
-                style={{ color: stat.color }}
-              >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#c98a4b]">
                 {stat.label}
               </p>
               <p className="mt-2 text-3xl font-semibold text-[#222]">
                 {stat.value}
               </p>
-              <div className="mt-2 flex items-center gap-1.5 text-xs text-[#222]/50">
-                {stat.trend === "up" && (
-                  <TrendingUp className="size-3.5 text-[#0CAF72]" />
-                )}
-                {stat.trend === "neutral" && (
-                  <CircleDot className="size-3.5 text-[#c98a4b]" />
-                )}
-                {stat.change}
-              </div>
+              <p className="mt-1 text-xs text-[#222]/50">{stat.sub}</p>
+              {stat.icon === "thumb" ? (
+                <IoMdThumbsUp className="absolute right-4 bottom-4 size-9 text-[#E5DFDF]" />
+              ) : (
+                <Image
+                  src={stat.icon}
+                  alt=""
+                  width={36}
+                  height={36}
+                  className="absolute right-4 bottom-4 size-9"
+                />
+              )}
             </div>
           ))}
         </div>
 
-        {/* Two-column layout */}
-        <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_340px]">
-          {/* Recent Missions table */}
-          <div className="rounded-2xl border border-black/5 bg-white">
-            <div className="flex items-center justify-between border-b border-black/5 px-6 py-4">
-              <div>
-                <h2 className="text-base font-semibold text-[#222]">
-                  Recent Missions
-                </h2>
-                <p className="text-xs text-[#222]/50">
-                  Latest client missions and assignments
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#222]/30" />
-                  <input
-                    placeholder="Search missions..."
-                    className="h-9 w-56 rounded-lg border border-black/10 bg-[#faf6f0] pl-9 pr-3 text-sm text-[#222] outline-none placeholder:text-[#222]/35 focus:border-[#761c37] focus:ring-2 focus:ring-[#761c37]/10"
-                  />
+        {/* Priority Request Queue + Concierge capacity */}
+        <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[1.4fr_1fr]">
+          {/* Priority Request Queue */}
+          <div className="rounded-2xl border border-black/5 bg-white p-6">
+            <SectionHeading title="Priority Request Queue" />
+            <div className="flex flex-col">
+              {PRIORITY_REQUESTS.map((req, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-between gap-4 border-b border-black/5 py-4 first:pt-0 last:border-0 last:pb-0"
+                >
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-[#222]">
+                      {req.title}
+                    </p>
+                    <p className="mt-1 truncate text-xs text-[#222]/50">
+                      {req.client} · {req.tier} · {req.ref} · {req.date} ·{" "}
+                      {req.amount}
+                    </p>
+                  </div>
+                  <button className="shrink-0 rounded-lg bg-[#761c37] px-4 py-2 text-xs font-medium text-white transition hover:brightness-110">
+                    Manage
+                  </button>
                 </div>
-                <select className="h-9 appearance-none rounded-lg border border-black/10 bg-[#faf6f0] px-3 pr-8 text-sm text-[#222]/60 outline-none">
-                  <option>All statuses</option>
-                  <option>In Progress</option>
-                  <option>Confirmed</option>
-                  <option>Pending</option>
-                  <option>Completed</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b border-black/5 text-[11px] font-semibold uppercase tracking-wider text-[#222]/40">
-                    <th className="px-6 py-3">Client</th>
-                    <th className="px-4 py-3">Mission</th>
-                    <th className="px-4 py-3">Type</th>
-                    <th className="px-4 py-3">Priority</th>
-                    <th className="px-4 py-3">Status</th>
-                    <th className="px-4 py-3">Date</th>
-                    <th className="px-4 py-3">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {RECENT_MISSIONS.map((m, i) => (
-                    <tr
-                      key={i}
-                      className="border-b border-black/5 last:border-0"
-                    >
-                      <td className="px-6 py-3.5">
-                        <div className="flex items-center gap-3">
-                          <Image
-                            src={m.avatar}
-                            alt={m.client}
-                            width={32}
-                            height={32}
-                            className="size-8 rounded-full object-cover"
-                          />
-                          <span className="font-medium text-[#222]">
-                            {m.client}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-4 py-3.5 text-[#222]/70">
-                        {m.mission}
-                      </td>
-                      <td className="px-4 py-3.5 text-[#222]/50">{m.type}</td>
-                      <td className="px-4 py-3.5">
-                        <span className="rounded-full bg-[#FFF4E5] px-2.5 py-1 text-xs font-medium text-[#c98a4b]">
-                          {m.priority}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3.5">
-                        <span
-                          className={`rounded-full px-2.5 py-1 text-xs font-medium ${statusColor(m.status)}`}
-                        >
-                          {m.status}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3.5 text-[#222]/50">{m.date}</td>
-                      <td className="px-4 py-3.5">
-                        <button className="grid size-7 place-items-center rounded-lg text-[#222]/40 transition hover:bg-black/5">
-                          <MoreHorizontal className="size-4" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              ))}
             </div>
           </div>
 
-          {/* Right column */}
-          <div className="flex flex-col gap-6">
-            <div className="rounded-2xl border border-black/5 bg-white p-5">
-              <h3 className="text-sm font-semibold text-[#222]">
-                Upcoming Today
-              </h3>
-              <p className="text-xs text-[#222]/50">
-                Scheduled appointments and meetings
-              </p>
-              <div className="mt-4 flex flex-col gap-3">
-                {UPCOMING.map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex items-start gap-3 rounded-xl border border-black/5 bg-[#faf6f0] p-3"
-                  >
-                    <div className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-[#761c37]/10 text-[#761c37]">
-                      <Clock className="size-4" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xs font-semibold text-[#c98a4b]">
-                        {item.time}
-                      </p>
-                      <p className="text-sm font-medium text-[#222]">
-                        {item.title}
-                      </p>
-                      <p className="text-xs text-[#222]/50">
-                        {item.location}
-                      </p>
-                    </div>
-                    <ArrowUpRight className="mt-0.5 size-4 shrink-0 text-[#222]/30" />
+          {/* Concierge capacity */}
+          <div className="rounded-2xl border border-black/5 bg-white p-6">
+            <SectionHeading title="Concierge capacity" />
+            <div className="flex flex-col">
+              {CONCIERGE_CAPACITY.map((c, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-between gap-4 border-b border-black/5 py-4 first:pt-0 last:border-0 last:pb-0"
+                >
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-[#222]">
+                      {c.name}
+                    </p>
+                    <p className="mt-1 truncate text-xs text-[#222]/50">
+                      {c.specialty}
+                    </p>
                   </div>
-                ))}
-              </div>
+                  <span className="shrink-0 text-sm font-medium text-[#222]/60">
+                    {c.load}
+                  </span>
+                </div>
+              ))}
             </div>
+          </div>
+        </div>
 
-            <div className="rounded-2xl border border-black/5 bg-white p-5">
-              <h3 className="text-sm font-semibold text-[#222]">
-                Performance Snapshot
-              </h3>
-              <p className="mb-4 text-xs text-[#222]/50">This quarter</p>
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-[#222]/70">
-                    Missions Completed
-                  </span>
-                  <span className="text-sm font-semibold text-[#222]">142</span>
-                </div>
-                <div className="h-2 rounded-full bg-[#faf6f0]">
-                  <div
-                    className="h-2 rounded-full bg-gradient-to-r from-[#761c37] to-[#913f58]"
-                    style={{ width: "78%" }}
-                  />
-                </div>
-                <div className="mt-2 flex items-center justify-between">
-                  <span className="text-sm text-[#222]/70">Revenue Target</span>
-                  <span className="text-sm font-semibold text-[#222]">
-                    $1.2M
-                  </span>
-                </div>
-                <div className="h-2 rounded-full bg-[#faf6f0]">
-                  <div
-                    className="h-2 rounded-full bg-gradient-to-r from-[#c98a4b] to-[#f4c481]"
-                    style={{ width: "64%" }}
-                  />
-                </div>
-                <div className="mt-2 flex items-center justify-between">
-                  <span className="text-sm text-[#222]/70">
-                    Client Retention
-                  </span>
-                  <span className="text-sm font-semibold text-[#0CAF72]">
-                    96%
-                  </span>
-                </div>
-                <div className="h-2 rounded-full bg-[#faf6f0]">
-                  <div
-                    className="h-2 rounded-full bg-[#0CAF72]"
-                    style={{ width: "96%" }}
-                  />
-                </div>
+        {/* Automation Health */}
+        <div className="mt-6 rounded-2xl border border-black/5 bg-white p-6">
+          <SectionHeading title="Automation Health" />
+          <div className="flex flex-col">
+            {AUTOMATION_HEALTH.map((a, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between gap-4 border-b border-black/5 py-4 first:pt-0 last:border-0 last:pb-0"
+              >
+                <p className="text-sm font-medium text-[#222]">{a.label}</p>
+                <span className="rounded-full bg-[#E6F9F0] px-3 py-1 text-xs font-medium text-[#0CAF72]">
+                  {a.status}
+                </span>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
