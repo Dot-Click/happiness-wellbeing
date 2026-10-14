@@ -120,7 +120,10 @@ export default function DashboardPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#761c37]/20 to-transparent" />
           <div className="absolute inset-0 flex flex-col justify-end p-8">
             <h2 className="max-w-lg font-serif text-4xl font-medium leading-tight text-white">
-              How can we make your
+              <span className="bg-gradient-to-t from-[#761c37] to-transparent box-decoration-clone px-1">
+                How
+              </span>{" "}
+              can we make your
               <br />
               experience effortless today?
             </h2>
@@ -128,7 +131,7 @@ export default function DashboardPage() {
               One private command center for client requests, concierge
               allocation, partner resources and service delivery.
             </p>
-            <button className="mt-4 flex w-fit items-center gap-2 rounded-xl bg-gradient-to-r from-white to-[#FFF1DE] px-8 py-2.5 text-sm font-medium text-[#222] transition hover:brightness-95">
+            <button className="mt-4 flex w-fit items-center gap-2 rounded-xl bg-gradient-to-r from-white to-[#FFF1DE] px-8 py-4 text-sm font-medium text-[#222] transition hover:brightness-95">
               Review Priority Queue
               <ArrowRight className="size-4" />
             </button>

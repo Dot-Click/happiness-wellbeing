@@ -75,7 +75,7 @@ function NavSection({
           <Link
             key={item.href}
             href={item.href}
-            className={`mb-0.5 flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition ${
+            className={`mb-0.5 flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium transition ${
               active
                 ? "bg-gradient-to-r from-[#9E4560] to-[#761C37] text-white "
                 : "text-[#222]/70 hover:bg-black/5"
