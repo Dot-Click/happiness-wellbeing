@@ -132,9 +132,9 @@ export default function AdminPage() {
               Manage administrator accounts, roles and permission levels.
             </p>
           </div>
-          <button className="flex items-center gap-2 rounded-xl bg-[#0CAF72] px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:brightness-110">
+          <button className="flex items-center gap-2 rounded-xl bg-[#761c37] px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:brightness-110">
             <Plus className="size-4" />
-            Invite Admin
+            Add Administrator
           </button>
         </div>
 
