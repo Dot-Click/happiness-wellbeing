@@ -124,7 +124,7 @@ function typeColor(type: string) {
 export default function SupportPage() {
   return (
     <>
-      <div className="p-8">
+      <div className="px-3 py-8">
         {/* Section heading */}
         <div className="mb-6 flex items-end justify-between">
           <div>

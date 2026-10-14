@@ -94,7 +94,7 @@ export default function RequestsPage() {
   const [openMenu, setOpenMenu] = useState<number | null>(null);
 
   return (
-    <div className="p-8">
+    <div className="px-3 py-8">
       {/* Search + filters */}
       <div className="rounded-2xl border border-black/5 bg-white p-6">
         {/* Section heading */}

@@ -72,7 +72,7 @@ const SERVICES: Service[] = [
 
 export default function ServicesPage() {
   return (
-    <div className="p-8">
+    <div className="px-3 py-8">
       {/* Toolbar */}
       <div className="mb-6 flex items-center justify-between gap-3">
         <div className="relative w-full max-w-md">

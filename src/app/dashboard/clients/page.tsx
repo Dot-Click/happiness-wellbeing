@@ -67,7 +67,7 @@ function statusColor(status: string) {
 
 export default function ClientsPage() {
   return (
-    <div className="p-8">
+    <div className="px-3 py-8">
       {/* Workspace header + controls */}
       <div className="rounded-2xl border border-black/5 bg-white p-6">
         <div className="mb-5">

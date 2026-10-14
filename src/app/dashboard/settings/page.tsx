@@ -142,7 +142,7 @@ export default function SettingsPage() {
   const [entity, setEntity] = useState("Clients");
 
   return (
-    <div className="p-8">
+    <div className="px-3 py-8">
       {/* Tab bar + Save */}
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-black/5 bg-white p-2">
         <div className="flex flex-wrap items-center gap-1">

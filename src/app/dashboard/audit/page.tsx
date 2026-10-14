@@ -88,7 +88,7 @@ function resultColor(result: string) {
 export default function AuditPage() {
   return (
     <>
-      <div className="p-8">
+      <div className="px-3 py-8">
         {/* Section heading */}
         <div className="mb-6">
           <h2 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#222]/40">

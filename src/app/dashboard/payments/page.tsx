@@ -72,7 +72,7 @@ function statusColor(status: string) {
 
 export default function PaymentsPage() {
   return (
-    <div className="p-8">
+    <div className="px-3 py-8">
       {/* Stat cards */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
         {STATS.map((stat) => {
